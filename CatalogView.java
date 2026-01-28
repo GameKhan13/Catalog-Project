@@ -39,7 +39,7 @@ public class CatalogView extends JFrame {
         buttonPanel.add(editButton, BorderLayout.PAGE_END);
 
         JPanel fieldPanel = new JPanel(new BorderLayout());
-        bottomPanel.add(fieldPanel, BorderLayout.LINE_END);
+        bottomPanel.add(fieldPanel, BorderLayout.CENTER);
 
         nameField = new JTextField(40);
         fieldPanel.add(nameField, BorderLayout.PAGE_START);
@@ -47,10 +47,4 @@ public class CatalogView extends JFrame {
         descriptionField = new JTextField(40);
         fieldPanel.add(descriptionField, BorderLayout.PAGE_END);
     }
-
-    public static void main(String[] args) {
-        CatalogView view = new CatalogView();
-        view.setVisible(true);
-    }
-    
 }
