@@ -29,7 +29,7 @@ public class projectBackend{
 
             try (BufferedWriter writer = Files.newBufferedWriter(
                     file, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-                writer.write(nextId + "," + name + "," + description);
+                writer.write(nextId + ". " + name + ", " + description);
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -41,7 +41,7 @@ public class projectBackend{
         Path file = Paths.get("GroceryList.csv");
         try{
         List<String> lines = Files.readAllLines(file);
-        String line = id + "," + newName + "," + newDescription;
+        String line = id + ". " + newName + ", " + newDescription;
         lines.set(id, line);
         Files.write(file, lines);
 
@@ -66,8 +66,30 @@ public class projectBackend{
     }
     public static void main(String[] args) {
         projectBackend backend = new projectBackend();
-        backend.addEntry("Apples", "Fresh red apples");
-        backend.editEntry(1, "Bananas", "Ripe yellow bananas");
+        CatalogView view = new CatalogView();
+        List<String> entries = backend.viewEntries();
+        view.listDisplay.setListData(entries.toArray());
+
+        view.addButton.addActionListener(e -> {
+            String name = view.nameField.getText();
+            String description = view.descriptionField.getText();
+            backend.addEntry(name, description);
+            List<String> updatedEntries = backend.viewEntries();
+            view.listDisplay.setListData(updatedEntries.toArray());
+        });
+
+        view.editButton.addActionListener(e -> {
+            int selectedIndex = view.listDisplay.getSelectedIndex();
+            if (selectedIndex != -1) {
+                String newName = view.nameField.getText();
+                String newDescription = view.descriptionField.getText();
+                backend.editEntry(selectedIndex, newName, newDescription);
+                List<String> updatedEntries = backend.viewEntries();
+                view.listDisplay.setListData(updatedEntries.toArray());
+            }
+        });
+
+        view.setVisible(true);
     }
 
 }
