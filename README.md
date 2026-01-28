@@ -18,3 +18,8 @@ Properties:
 - addEntry (name, description)
 - editEntry (id, new_name, new_description)
 - getAllEntries (returns List<Entry>)
+
+## Front End Public Components
+- listDisplay (JList)
+- addButton (JButton)
+- editButton (JButton)
