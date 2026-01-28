@@ -1,6 +1,10 @@
-0. blueberry, vegetable
-1. blueberry, vegetable
+0,blueberry,fruit
+1,fruit,berry
 3,Milk,Dairy
 4,Apples,Fresh red apples
 5,strawberry,fruit
-6. grape, berry
+5,true,hey
+6,toilet paper,misc
+7,strawberry,fruit
+8,honeydew,melon
+9,applejackas,cereal

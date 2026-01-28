@@ -8,44 +8,49 @@ public class projectBackend{
         Path file = Paths.get("GroceryList.csv");
 
         try {
-            int nextId = 1;
-
-            if (Files.exists(file)) {
-                List<String> lines = Files.readAllLines(file);
-
-                // find last data line (skip header, skip blanks)
-                for (int i = lines.size() - 1; i >= 1; i--) {
-                    String line = lines.get(i).trim();
-                    if (!line.isEmpty()) {
-                        String[] parts = line.split(",", -1);
-                        nextId = Integer.parseInt(parts[0].trim()) + 1;
-                        break;
-                    }
-                }
-            } else {
-                // if file does not exist, write header first
+            if (!Files.exists(file)) {
                 Files.writeString(file, "ID,Item,Describe\n");
             }
 
+            List<String> lines = Files.readAllLines(file);
+
+            int nextId = 1;
+            for (int i = lines.size() - 1; i >= 1; i--) { // skip header
+                String row = lines.get(i).trim();
+                if (!row.isEmpty()) {
+                    String[] parts = row.split(",", -1);
+                    nextId = Integer.parseInt(parts[0].trim()) + 1;
+                    break;
+                }
+            }
+
             try (BufferedWriter writer = Files.newBufferedWriter(
-                    file, StandardOpenOption.CREATE, StandardOpenOption.APPEND)) {
-                writer.write(nextId + ". " + name + ", " + description);
+                    file, StandardOpenOption.APPEND)) {
+                writer.write(nextId + "," + name + "," + description);
                 writer.newLine();
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public void editEntry(int id,String newName, String newDescription) {
+    public void editEntry(int id, String newName, String newDescription) {
         Path file = Paths.get("GroceryList.csv");
-        try{
-        List<String> lines = Files.readAllLines(file);
-        String line = id + ". " + newName + ", " + newDescription;
-        lines.set(id, line);
-        Files.write(file, lines);
 
-        }catch(IOException e){
+        try {
+            List<String> lines = Files.readAllLines(file);
+
+            for (int i = 1; i < lines.size(); i++) { // skip header
+                String[] parts = lines.get(i).split(",", -1);
+                if (parts.length >= 3 && parts[0].trim().equals(String.valueOf(id))) {
+                    lines.set(i, id + "," + newName + "," + newDescription);
+                    break;
+                }
+            }
+
+            Files.write(file, lines);
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
