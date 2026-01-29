@@ -29,6 +29,7 @@ public class CatalogController {
             @Override
             public void windowClosing(WindowEvent we) {
                 model.writeToFile(); // save the data to the csv file
+                view.dispose();
             }
         });
 
