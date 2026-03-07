@@ -1,4 +1,4 @@
-package catalog;
+package catalog.back_end;
 
 import catalog.front_end.login_page.LoginScene;
 import javafx.application.Application;
