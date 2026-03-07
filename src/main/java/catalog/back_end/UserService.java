@@ -1,4 +1,4 @@
-package catalog;
+package catalog.back_end;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
