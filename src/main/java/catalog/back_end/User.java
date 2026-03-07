@@ -1,4 +1,4 @@
-package catalog;
+package catalog.back_end;
 
 import java.util.ArrayList;
 import java.util.List;
