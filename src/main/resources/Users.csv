@@ -1,2 +1,3 @@
 username,password,isAdmin,playlist_ids
 Andy,Lopez,true,"1|2"
+Eliseo,Marinez,false,""
