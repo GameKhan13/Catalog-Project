@@ -1,6 +1,6 @@
-package catalog.back_end;
+package catalog;
 
-import catalog.front_end.login_page.LoginScene;
+import catalog.controllers.LoginScene;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
