@@ -1,5 +1,6 @@
-package catalog.front_end;
+package catalog.front_end.login_page;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
@@ -10,7 +11,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
-public class LoginPage extends GridPane {
+public class SignupPage extends GridPane {
 
     public final TextField usernameField = new TextField();
     public final PasswordField passwordField = new PasswordField();
@@ -18,7 +19,7 @@ public class LoginPage extends GridPane {
     public final Button loginButton = new Button();
     public final Button signupButton = new Button();
 
-    public LoginPage() {
+    public SignupPage() {
         setStyle("-fx-background-color: #2b2b2b;");
 
         setAlignment(Pos.CENTER);
@@ -32,6 +33,8 @@ public class LoginPage extends GridPane {
         createUsernameField();
         createPasswordField();
         createButtonsArea();
+
+        Platform.runLater(this::requestFocus);
     }
 
     private void defineColumns () {
@@ -43,7 +46,7 @@ public class LoginPage extends GridPane {
 
     private void createHeaderArea() {
 
-        Label header = new Label("Music Catalog Login");
+        Label header = new Label("Music Catalog Sign Up");
         String headerStyle = 
             """
             -fx-font-size: 24px;
@@ -68,12 +71,12 @@ public class LoginPage extends GridPane {
 
     private void createButtonsArea() {
 
-        loginButton.setText("Login");
+        loginButton.setText("Return To Login");
         loginButton.setPrefWidth(Double.MAX_VALUE);
         GridPane.setHgrow(loginButton, Priority.ALWAYS);
         add(loginButton, 0, 3);
 
-        signupButton.setText("Create Account");
+        signupButton.setText("Sign Up");
         signupButton.setPrefWidth(Double.MAX_VALUE);
         GridPane.setHgrow(signupButton, Priority.ALWAYS);
         add(signupButton, 1, 3);

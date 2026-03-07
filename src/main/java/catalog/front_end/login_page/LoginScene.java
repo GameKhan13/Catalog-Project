@@ -1,7 +1,12 @@
-package catalog.front_end;
+package catalog.front_end.login_page;
 
+import java.util.LinkedList;
+
+import catalog.User;
+import catalog.front_end.main.MainScene;
 import javafx.scene.Scene;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 public class LoginScene extends Scene {
 
@@ -9,7 +14,7 @@ public class LoginScene extends Scene {
     private final SignupPage signupPage;
 
     public LoginScene() {
-        super(new GridPane(), 1500, 1000);
+        super(new Pane(), 800, 500);
 
         loginPage = new LoginPage();
 
@@ -18,7 +23,7 @@ public class LoginScene extends Scene {
         });
 
         loginPage.loginButton.setOnAction(e -> {
-            // Functionallity for clicking the login button
+            ((Stage) getWindow()).setScene(new MainScene(new User("Test", "123", true, new LinkedList<>()))); // Functionality for clicking the login button (Currently no checking is done)
         });
 
         signupPage = new SignupPage();
