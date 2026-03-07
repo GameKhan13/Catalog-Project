@@ -1,11 +1,14 @@
 package catalog.controllers;
 
-import java.util.LinkedList;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import catalog.back_end.User;
+import catalog.back_end.UserService;
 import catalog.front_end.login_page.LoginPage;
 import catalog.front_end.login_page.SignupPage;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
@@ -14,7 +17,7 @@ public class LoginScene extends Scene {
     private final LoginPage loginPage;
     private final SignupPage signupPage;
 
-    public LoginScene() {
+    public LoginScene(UserService userService) {
         super(new Pane(), 800, 500);
 
         loginPage = new LoginPage();
@@ -24,7 +27,21 @@ public class LoginScene extends Scene {
         });
 
         loginPage.loginButton.setOnAction(e -> {
-            ((Stage) getWindow()).setScene(new MainScene(new User("Test", "123", true, new LinkedList<>()))); // Functionality for clicking the login button (Currently no checking is done)
+            String username = loginPage.usernameField.getText().trim();
+            String password = loginPage.passwordField.getText();
+
+            try {
+                boolean validLogin = userService.loginUser(username, password);
+
+                if (validLogin) {
+                    ((Stage) getWindow()).setScene(new MainScene(userService.getCurrentUser()));
+                } else {
+                    showPopup("Login Failed", "Incorrect username or password.", Alert.AlertType.ERROR);
+                }
+            } catch (IOException ex) {
+                showPopup("Error", "There was a problem reading the users file.", Alert.AlertType.ERROR);
+                ex.printStackTrace();
+            }
         });
 
         signupPage = new SignupPage();
@@ -34,7 +51,24 @@ public class LoginScene extends Scene {
         });
 
         signupPage.signupButton.setOnAction(e -> {
-            // Functionallity for clicking the signup button
+            String username = signupPage.usernameField.getText().trim();
+            String password = signupPage.passwordField.getText();
+
+            User newUser = new User(username, password, false, new ArrayList<>());
+
+            try {
+                boolean signUpSuccess = userService.signUpUser(newUser);
+
+                if (signUpSuccess) {
+                    userService.loginUser(username, password);
+                    ((Stage) getWindow()).setScene(new MainScene(userService.getCurrentUser()));
+                } else {
+                    showPopup("Signup Failed", "Username already exists.", Alert.AlertType.ERROR);
+                }
+            } catch (IOException ex) {
+                showPopup("Error", "There was a problem updating the users file.", Alert.AlertType.ERROR);
+                ex.printStackTrace();
+            }
         });
 
         switchToLogin();
@@ -48,5 +82,12 @@ public class LoginScene extends Scene {
     protected final void switchToLogin () {
         setRoot(loginPage);
         loginPage.requestFocus();
+    }
+    private void showPopup(String title, String message, Alert.AlertType type) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }
