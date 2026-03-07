@@ -1,6 +1,7 @@
-package catalog.front_end.main;
+package catalog.controllers;
 
-import catalog.User;
+import catalog.back_end.User;
+import catalog.front_end.main.MainPage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 

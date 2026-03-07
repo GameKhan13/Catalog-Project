@@ -1,9 +1,10 @@
-package catalog.front_end.login_page;
+package catalog.controllers;
 
 import java.util.LinkedList;
 
-import catalog.User;
-import catalog.front_end.main.MainScene;
+import catalog.back_end.User;
+import catalog.front_end.login_page.LoginPage;
+import catalog.front_end.login_page.SignupPage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
