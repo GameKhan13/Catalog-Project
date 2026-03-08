@@ -37,14 +37,14 @@ public class SignupPage extends GridPane {
         Platform.runLater(this::requestFocus);
     }
 
-    private void defineColumns () {
+    protected final void defineColumns () {
         ColumnConstraints col1 = new ColumnConstraints(250);
         ColumnConstraints col2 = new ColumnConstraints(250);
 
         getColumnConstraints().addAll(col1, col2);
     }
 
-    private void createHeaderArea() {
+    protected final void createHeaderArea() {
 
         Label header = new Label("Music Catalog Sign Up");
         String headerStyle = 
@@ -57,19 +57,19 @@ public class SignupPage extends GridPane {
         add(header, 0, 0, 2, 1);
     }
 
-    private void createUsernameField() {
+    protected final void createUsernameField() {
 
         usernameField.setPromptText("Username");
         add(usernameField, 0, 1, 2, 1);
     }
 
-    private void createPasswordField() {
+    protected final void createPasswordField() {
 
         passwordField.setPromptText("Password");
         add(passwordField, 0, 2, 2, 1);
     }
 
-    private void createButtonsArea() {
+    protected final void createButtonsArea() {
 
         loginButton.setText("Return To Login");
         loginButton.setPrefWidth(Double.MAX_VALUE);
