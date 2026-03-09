@@ -21,7 +21,7 @@ public class MainPage extends GridPane {
     }
 
     protected final void setUpPanels() {
-        displayPane.setPrefSize(1500, 900);
+        displayPane.setPrefSize(1000, 500);
         add(displayPane, 0, 0);
 
         setTab(homePanel);

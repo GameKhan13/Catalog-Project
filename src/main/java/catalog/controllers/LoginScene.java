@@ -18,7 +18,7 @@ public class LoginScene extends Scene {
     private final SignupPage signupPage;
 
     public LoginScene(UserService userService) {
-        super(new Pane(), 800, 500);
+        super(new Pane());
 
         loginPage = new LoginPage();
 

@@ -24,6 +24,7 @@ public class LoginPage extends GridPane {
         setAlignment(Pos.CENTER);
         setHgap(10);
         setVgap(10);
+        setPrefSize(800, 500);
         setPadding(new Insets(20));
 
 
