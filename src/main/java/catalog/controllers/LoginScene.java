@@ -5,8 +5,8 @@ import java.util.ArrayList;
 
 import catalog.back_end.User;
 import catalog.back_end.UserService;
-import catalog.front_end.login_page.LoginPage;
-import catalog.front_end.login_page.SignupPage;
+import catalog.front_end.login.LoginPage;
+import catalog.front_end.login.SignupPage;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.layout.Pane;
