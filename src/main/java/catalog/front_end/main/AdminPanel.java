@@ -105,4 +105,16 @@ public class AdminPanel extends GridPane {
 
         add(buttonPane, 1, 1);
     }
+    public void clearFields() {
+        nameField.clear();
+        artistField.clear();
+        albumField.clear();
+        yearField.clear();
+        genreField.clear();
+    }
+
+    public int getSelectedSongId() {
+        EntryDisplayable selected = results.getSelectionModel().getSelectedItem();
+        return selected.getEntry().getSongId();
+    }
 }
