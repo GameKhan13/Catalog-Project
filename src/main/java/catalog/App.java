@@ -1,5 +1,6 @@
 package catalog;
 
+import catalog.back_end.EntryService;
 import catalog.back_end.UserService;
 import catalog.controllers.LoginScene;
 import javafx.application.Application;
@@ -10,7 +11,8 @@ public class App extends Application {
     @Override
     public void start(Stage mainStage) throws Exception {
         UserService userService = new UserService("src\\main\\resources\\Users.csv");
-        LoginScene loginScene = new LoginScene(userService);
+        EntryService entryService = new EntryService("src\\main\\resources\\Entries.csv", userService);
+        LoginScene loginScene = new LoginScene(userService, entryService);
 
         mainStage.setTitle("Music Catalog");
         mainStage.setScene(loginScene);
