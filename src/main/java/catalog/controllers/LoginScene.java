@@ -3,7 +3,6 @@ package catalog.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import catalog.back_end.Entry;
 import catalog.back_end.EntryService;
 import catalog.back_end.User;
 import catalog.back_end.UserService;
@@ -36,7 +35,7 @@ public class LoginScene extends Scene {
                 boolean validLogin = userService.loginUser(username, password);
 
                 if (validLogin) {
-                    ((Stage) getWindow()).setScene(new MainScene(userService.getCurrentUser(), entryService));
+                    ((Stage) getWindow()).setScene(new MainScene(userService, entryService));
                 } else {
                     showPopup("Login Failed", "Incorrect username or password.", Alert.AlertType.ERROR);
                 }
@@ -63,7 +62,7 @@ public class LoginScene extends Scene {
 
                 if (signUpSuccess) {
                     userService.loginUser(username, password);
-                    ((Stage) getWindow()).setScene(new MainScene(userService.getCurrentUser(), entryService));
+                    ((Stage) getWindow()).setScene(new MainScene(userService, entryService));
                 } else {
                     showPopup("Signup Failed", "Username already exists.", Alert.AlertType.ERROR);
                 }

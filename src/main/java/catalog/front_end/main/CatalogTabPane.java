@@ -12,6 +12,7 @@ public class CatalogTabPane extends TilePane {
 
     public CatalogTabPane() {
         setStyle("-fx-background-color: #2b2b2b;");
+        setPrefHeight(50);
 
         addTabButtons();
     }
@@ -19,8 +20,8 @@ public class CatalogTabPane extends TilePane {
     protected final void addTabButtons() {
         setAlignment(Pos.CENTER);
 
-        homeButton.setPrefSize(150, 50);
-        adminButton.setPrefSize(150, 50);
+        homeButton.setPrefWidth(150);
+        adminButton.setPrefWidth(150);
 
         add(homeButton);
         add(adminButton);

@@ -10,19 +10,21 @@ public class MainPage extends GridPane {
 
     public final Pane displayPane = new Pane();
     public final CatalogTabPane tabPane = new CatalogTabPane();
+    public final TopBar topBar = new TopBar();
 
     private Pane currentPanel;
 
     public MainPage(boolean isAdmin) {
         setStyle("-fx-background-color: #2b2b2b;");
 
+        setUpTopBar();
         setUpPanels();
         setUpTabs(isAdmin);
     }
 
     protected final void setUpPanels() {
-        displayPane.setPrefSize(1000, 500);
-        add(displayPane, 0, 0);
+        //displayPane.setPrefHeight(Double.MAX_VALUE);
+        add(displayPane, 0, 1);
 
         setTab(homePanel);
     }
@@ -32,7 +34,11 @@ public class MainPage extends GridPane {
             tabPane.removeAdminButton();
         }
 
-        add(tabPane, 0, 1);
+        add(tabPane, 0, 2);
+    }
+
+    protected final void setUpTopBar() {
+        add(topBar, 0, 0);
     }
 
     public void setTab(Pane pane) {

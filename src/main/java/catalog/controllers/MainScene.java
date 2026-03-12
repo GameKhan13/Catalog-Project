@@ -1,27 +1,37 @@
 package catalog.controllers;
 
-import catalog.back_end.Entry;
+import java.io.IOException;
+
 import catalog.back_end.EntryService;
-import catalog.back_end.User;
+import catalog.back_end.UserService;
 import catalog.front_end.main.MainPage;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
-
-import java.io.IOException;
+import javafx.stage.Stage;
 
 public class MainScene extends Scene {
 
     private final MainPage mainPage;
-    private final User user;
     private final AdminController adminController;
 
-    public MainScene(User user, EntryService entryService) {
+    private final EntryService entryService;
+    private final UserService userService;
+
+    public MainScene(UserService userService, EntryService entryService) {
         super(new Pane());
 
-        mainPage = new MainPage(user.isAdmin());
+        mainPage = new MainPage(userService.getCurrentUser().isAdmin());
         setRoot(mainPage);
-        this.user = user;
+
+        this.entryService = entryService;
+        this.userService = userService;
+
         this.adminController = new AdminController(entryService);
+
+        mainPage.topBar.logoutButton.setOnAction(e -> {
+            userService.logout();
+            ((Stage) getWindow()).setScene(new LoginScene(userService, entryService));
+        });
 
         mainPage.tabPane.homeButton.setOnAction(e -> {
             mainPage.setTab(mainPage.homePanel);
