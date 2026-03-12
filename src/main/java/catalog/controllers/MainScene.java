@@ -26,6 +26,8 @@ public class MainScene extends Scene {
         this.entryService = entryService;
         this.userService = userService;
 
+        refreshHomePanel();
+
         this.adminController = new AdminController(entryService);
 
         mainPage.topBar.logoutButton.setOnAction(e -> {
@@ -34,6 +36,7 @@ public class MainScene extends Scene {
         });
 
         mainPage.tabPane.homeButton.setOnAction(e -> {
+            refreshHomePanel();
             mainPage.setTab(mainPage.homePanel);
         });
 
@@ -109,7 +112,15 @@ public class MainScene extends Scene {
 
     private void refreshAdminPanel() {
         try {
-            mainPage.adminPanel.setResults(adminController.getAllSongs());
+            mainPage.adminPanel.results.setResults(adminController.getAllSongs());
+        } catch (IOException e) {
+            System.out.println("Could not load songs.");
+        }
+    }
+
+    private void refreshHomePanel() {
+        try {
+            mainPage.homePanel.results.setResults(entryService.getAllEntries());
         } catch (IOException e) {
             System.out.println("Could not load songs.");
         }

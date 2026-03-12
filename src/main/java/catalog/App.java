@@ -11,7 +11,7 @@ public class App extends Application {
     @Override
     public void start(Stage mainStage) throws Exception {
         UserService userService = new UserService("src\\main\\resources\\Users.csv");
-        EntryService entryService = new EntryService("src\\main\\resources\\Entries.csv", userService);
+        EntryService entryService = new EntryService("src\\main\\resources\\Songs.csv", userService);
         LoginScene loginScene = new LoginScene(userService, entryService);
 
         mainStage.setTitle("Music Catalog");

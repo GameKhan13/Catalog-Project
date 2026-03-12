@@ -1,14 +1,8 @@
 package catalog.front_end.main;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import catalog.back_end.Entry;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.TilePane;
@@ -16,7 +10,7 @@ import javafx.scene.paint.Color;
 
 public class AdminPanel extends GridPane {
 
-    private final ListView<EntryDisplayable> results = new ListView<>();
+    public ResultsDisplayPanel results = new ResultsDisplayPanel();
 
     public final TextField nameField = new TextField();
     public final TextField albumField = new TextField();
@@ -38,20 +32,8 @@ public class AdminPanel extends GridPane {
         setUpButtons();
     }
 
-    public void setResults(List<Entry> entries) {
-        List<EntryDisplayable> displayableEntries = new ArrayList<>();
-
-        for (Entry entry : entries) {
-            displayableEntries.add(new EntryDisplayable(entry));
-        }
-
-        ObservableList<EntryDisplayable> observableEntries = FXCollections.observableArrayList(displayableEntries);
-
-        this.results.setItems(observableEntries);
-    }
-
     protected final void setUpResultsView() {
-        results.setPrefSize(600, 500);
+        results.setPrefSize(700, 500);
         setRowSpan(results, REMAINING);
         add(results, 0, 0);
     }
@@ -113,8 +95,22 @@ public class AdminPanel extends GridPane {
         genreField.clear();
     }
 
+    public void setFields(
+        String name,
+        String artist,
+        String album, 
+        String year,
+        String genre
+    ) {
+        nameField.setText(name);
+        artistField.setText(artist);
+        albumField.setText(album);
+        yearField.setText(year);
+        genreField.setText(genre);
+    }
+
     public int getSelectedSongId() {
-        EntryDisplayable selected = results.getSelectionModel().getSelectedItem();
-        return selected.getEntry().getSongId();
+        Entry selected = results.getSelectedResult();
+        return selected.getSongId();
     }
 }
