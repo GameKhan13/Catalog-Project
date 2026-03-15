@@ -1,25 +1,12 @@
-# Catalog-Project
-simple catalog project for lab
+# Music Catalog Project
+A simple music catalog designed to manage songs by offering searching, adn organising via playlists to all users, as well as catalog entry editing for admin users.
 
-## Data Base:
-CSV File with each row being a new entry
+## Running The MVP
+Required programs:
+- Java 25.0.1
+- Maven 3.9.12
 
-Functions:
-- read (returns List<Entry>)
-- write (takes List<Entry>)
-
-## Entry Class
-Properties:
-- id (int)
-- name (String)
-- desciption (String)
-
-## Backend Public Functions
-- addEntry (name, description)
-- editEntry (id, new_name, new_description)
-- getAllEntries (returns List<Entry>)
-
-## Front End Public Components
-- listDisplay (JList)
-- addButton (JButton)
-- editButton (JButton)
+Then run the following command inside the root of the project
+```
+mvn javafx:run
+```
