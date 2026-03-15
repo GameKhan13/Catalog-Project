@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
 
 public class AdminPanel extends GridPane {
 
-    public ResultsDisplayPanel results = new ResultsDisplayPanel();
+    public SearchingPane searchingPane = new SearchingPane();
 
     public final TextField nameField = new TextField();
     public final TextField albumField = new TextField();
@@ -33,9 +33,9 @@ public class AdminPanel extends GridPane {
     }
 
     protected final void setUpResultsView() {
-        results.setPrefSize(700, 500);
-        setRowSpan(results, REMAINING);
-        add(results, 0, 0);
+        searchingPane.setPrefSize(700, 500);
+        setRowSpan(searchingPane, REMAINING);
+        add(searchingPane, 0, 0);
     }
 
     protected final void setUpInputFields() {
@@ -110,7 +110,7 @@ public class AdminPanel extends GridPane {
     }
 
     public int getSelectedSongId() {
-        Entry selected = results.getSelectedResult();
+        Entry selected = searchingPane.getSelectedResult();
         return selected.getSongId();
     }
 }

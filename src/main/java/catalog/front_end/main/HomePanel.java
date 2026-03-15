@@ -4,15 +4,15 @@ import javafx.scene.layout.GridPane;
 
 public class HomePanel extends GridPane {
 
-    public ResultsDisplayPanel results = new ResultsDisplayPanel();
+    public SearchingPane searchingPane = new SearchingPane();
 
     public HomePanel() {
         setStyle("-fx-background-color: #2b2b2b;");
 
-        setUpResultsView();
+        setUpContent();
     }
 
-    protected final void setUpResultsView() {
-        add(results, 0, 0);
+    protected final void setUpContent() {
+        add(searchingPane, 0, 0);
     }
 }

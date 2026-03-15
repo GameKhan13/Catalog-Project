@@ -112,7 +112,7 @@ public class MainScene extends Scene {
 
     private void refreshAdminPanel() {
         try {
-            mainPage.adminPanel.results.setResults(adminController.getAllSongs());
+            mainPage.adminPanel.searchingPane.setResults(adminController.getAllSongs());
         } catch (IOException e) {
             System.out.println("Could not load songs.");
         }
@@ -120,7 +120,7 @@ public class MainScene extends Scene {
 
     private void refreshHomePanel() {
         try {
-            mainPage.homePanel.results.setResults(entryService.getAllEntries());
+            mainPage.homePanel.searchingPane.setResults(entryService.getAllEntries());
         } catch (IOException e) {
             System.out.println("Could not load songs.");
         }
