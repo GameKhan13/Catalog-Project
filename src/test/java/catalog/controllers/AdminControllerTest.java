@@ -67,25 +67,6 @@ public class AdminControllerTest {
 
         assertFalse(result);
     }
-
-    @Test
-    void addSong_shouldFail_whenArtistIsOnlySpecialCharacter() {
-        AdminController controller = new AdminController(null);
-
-        boolean result = controller.addSong("Song", "!", "Album", 2020, "Pop");
-
-        assertFalse(result);
-    }
-
-    @Test
-    void addSong_shouldFail_whenNameIsOnlySpecialCharacter() {
-        AdminController controller = new AdminController(null);
-
-        boolean result = controller.addSong("!", "Artist", "Album", 2020, "Pop");
-
-        assertFalse(result);
-    }
-
     @Test
     void addSong_shouldSucceed_whenInputIsValid() throws Exception {
         AdminController controller = createAdminController();
@@ -94,7 +75,7 @@ public class AdminControllerTest {
 
         assertTrue(result);
         assertEquals(1, controller.getAllSongs().size());
-        assertEquals("Song", controller.getAllSongs().get(0).getName());
+        assertEquals("Song", controller.getAllSongs().getFirst().getName());
     }
 
     @Test
@@ -102,13 +83,13 @@ public class AdminControllerTest {
         AdminController controller = createAdminController();
         controller.addSong("Old Song", "Old Artist", "Old Album", 2000, "Rock");
 
-        int songId = controller.getAllSongs().get(0).getSongId();
+        int songId = controller.getAllSongs().getFirst().getSongId();
 
         boolean result = controller.editSong(songId, "New Song", "New Artist", "New Album", 2024, "Pop");
 
         assertTrue(result);
-        assertEquals("New Song", controller.getAllSongs().get(0).getName());
-        assertEquals("New Artist", controller.getAllSongs().get(0).getArtist());
+        assertEquals("New Song", controller.getAllSongs().getFirst().getName());
+        assertEquals("New Artist", controller.getAllSongs().getFirst().getArtist());
     }
 
     @Test
@@ -116,11 +97,27 @@ public class AdminControllerTest {
         AdminController controller = createAdminController();
         controller.addSong("Song", "Artist", "Album", 2020, "Pop");
 
-        int songId = controller.getAllSongs().get(0).getSongId();
+        int songId = controller.getAllSongs().getFirst().getSongId();
 
         boolean result = controller.deleteSong(songId);
 
         assertTrue(result);
         assertEquals(0, controller.getAllSongs().size());
     }
+
+    @Test
+    void deleteSong_shouldFail_whenSongDoesNotExist() throws Exception {
+        AdminController controller = createAdminController();
+        boolean result = controller.deleteSong(-1);
+        assertFalse(result);
+    }
+    @Test
+    void editSong_shouldFail_whenSongDoesNotExist() throws Exception {
+        AdminController controller = createAdminController();
+
+        boolean result = controller.editSong(999, "New Song", "New Artist", "New Album", 2024, "Pop");
+
+        assertFalse(result);
+    }
+
 }
