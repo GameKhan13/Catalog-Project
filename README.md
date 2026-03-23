@@ -1,25 +1,26 @@
-# Catalog-Project
-simple catalog project for lab
+# Sprint 4 – Full admin prototype
 
-## Data Base:
-CSV File with each row being a new entry
+This is the full working version.
 
-Functions:
-- read (returns List<Entry>)
-- write (takes List<Entry>)
+Included:
+- Login page
+- Sign up page
+- Main catalog page
+- Search/filter by title, artist, genre, album, year, and lyrics
+- Personal playlists
+- Global playlists
+- Admin song add/edit/delete
+- Dynamic image support from the local folder
+- CSV persistence for users, songs, and playlists
 
-## Entry Class
-Properties:
-- id (int)
-- name (String)
-- desciption (String)
+Run:
+```bash
+mvn compile exec:java
+```
 
-## Backend Public Functions
-- addEntry (name, description)
-- editEntry (id, new_name, new_description)
-- getAllEntries (returns List<Entry>)
+Open:
+- http://localhost:4570
 
-## Front End Public Components
-- listDisplay (JList)
-- addButton (JButton)
-- editButton (JButton)
+Default admin:
+- username: admin
+- password: admin123
