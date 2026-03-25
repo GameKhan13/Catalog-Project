@@ -1,0 +1,3 @@
+id,username,passwordHash,isAdmin
+c62c7565-a55d-4622-be08-161907dbd8ab,admin,$2a$10$4H9K3BiqPIezE0.jPa8smO2GKcBh6slP4WDbPQ6eHPSLCUl6kYIyi,true
+4b74d2fa-2e29-45ef-9e23-267f29901158,letters,$2a$10$I5WRZPQWPPyce6zR5upGyuuDQieRpIyu4ebm8kS1IX.7xmbwzkkgy,false

@@ -1,0 +1,562 @@
+/* Global color variables and reusable design tokens.
+   These custom properties make the theme easier to maintain. */
+:root {
+  --bg: #0c0c0c;
+  --surface: #151515;
+  --surface-2: #1d1d1d;
+  --surface-3: #262626;
+  --text: #f5f5f5;
+  --muted: #a0a0a0;
+  --line: rgba(255, 255, 255, 0.08);
+  --green: #1db954;
+  --green-dark: #149443;
+  --danger: #ef4444;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+}
+
+/* Base reset rules used across the whole page. */
+* {
+  box-sizing: border-box;
+}
+
+/* Main page background, font, and default text color. */
+body {
+  margin: 0;
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(29, 185, 84, 0.20), transparent 24%),
+    linear-gradient(180deg, #111111 0%, #090909 100%);
+  color: var(--text);
+  min-height: 100vh;
+}
+
+button,
+/* Shared input styling for text fields and textareas. */
+input,
+textarea {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+}
+
+/* Utility class for elements that should be visually hidden. */
+.hidden {
+  display: none !important;
+}
+
+.screen {
+  min-height: 100vh;
+}
+
+/* Layout for the centered authentication screen. */
+.auth-screen {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* Card that holds the login and sign-up forms. */
+.auth-card {
+  width: min(420px, 100%);
+  background: rgba(18, 18, 18, 0.88);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 28px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(12px);
+}
+
+.brand-block,
+.sidebar-brand,
+.user-card,
+.section-title-row,
+.panel-title-row,
+.button-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand-block h1,
+.sidebar-brand h2,
+.hero h1,
+.section-title-row h2,
+.panel h3 {
+  margin: 0;
+}
+
+.brand-block p,
+.sidebar-brand p,
+.hero p,
+.user-card p,
+.hint,
+.song-meta,
+.playlist-card small {
+  margin: 4px 0 0;
+  color: var(--muted);
+}
+
+/* Reusable logo styling for the music note icon. */
+.brand-logo {
+  width: 58px;
+  height: 58px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, var(--green), #5ff28c);
+  display: grid;
+  place-items: center;
+  color: #00170a;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+.brand-logo.small {
+  width: 44px;
+  height: 44px;
+  font-size: 22px;
+  border-radius: 14px;
+}
+
+/* Tab switcher for login vs sign-up. */
+.tabs {
+  display: flex;
+  background: var(--surface-2);
+  padding: 6px;
+  border-radius: 16px;
+  margin: 22px 0 18px;
+}
+
+.tab {
+  flex: 1;
+  padding: 11px 14px;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--muted);
+}
+
+.tab.active {
+  background: #2a2a2a;
+  color: var(--text);
+}
+
+.auth-form,
+.stack-form {
+  display: grid;
+  gap: 14px;
+}
+
+/* Form field label styling. */
+label {
+  display: grid;
+  gap: 8px;
+  font-size: 14px;
+}
+
+input,
+textarea {
+  width: 100%;
+  background: #101010;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px 14px;
+  outline: none;
+}
+
+input:focus,
+textarea:focus {
+  border-color: rgba(29, 185, 84, 0.7);
+  box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.15);
+}
+
+/* Shared button shape and motion styling. */
+.primary-btn,
+.ghost-btn,
+.danger-btn,
+.secondary-btn {
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 700;
+  transition: transform 0.16s ease, opacity 0.16s ease, background 0.16s ease;
+}
+
+.primary-btn:hover,
+.ghost-btn:hover,
+.danger-btn:hover,
+.secondary-btn:hover {
+  transform: translateY(-1px);
+}
+
+.primary-btn {
+  background: var(--green);
+  color: #03130a;
+}
+
+.primary-btn:hover {
+  background: #28d364;
+}
+
+.ghost-btn {
+  background: #2a2a2a;
+  color: var(--text);
+}
+
+.secondary-btn {
+  background: #202020;
+  color: var(--text);
+}
+
+.danger-btn {
+  background: rgba(239, 68, 68, 0.16);
+  color: #fecaca;
+}
+
+.compact {
+  padding: 10px 14px;
+  font-size: 14px;
+}
+
+/* Two-column layout for the main app screen. */
+.app-screen {
+  display: grid;
+  grid-template-columns: 320px 1fr;
+}
+
+/* Left sidebar for branding and user information. */
+.sidebar {
+  background: rgba(10, 10, 10, 0.96);
+  border-right: 1px solid var(--line);
+  padding: 22px;
+}
+
+.sidebar > div {
+  display: grid;
+  gap: 18px;
+}
+
+/* Shared card styling used by several panels in the UI. */
+.user-card,
+.panel,
+.song-card,
+.hero,
+.filters {
+  background: rgba(22, 22, 22, 0.92);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  box-shadow: var(--shadow);
+}
+
+.user-card,
+.panel {
+  padding: 16px;
+}
+
+.inline-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  margin: 14px 0;
+}
+
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.checkbox-row input {
+  width: 18px;
+  height: 18px;
+}
+
+/* Playlist-related components.
+   Some of these styles remain from a broader version of the UI. */
+.playlist-list {
+  display: grid;
+  gap: 10px;
+}
+
+.playlist-card {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.playlist-card-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.playlist-song-list {
+  margin-top: 10px;
+  display: grid;
+  gap: 8px;
+}
+
+.playlist-song-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 12px;
+  padding: 8px 10px;
+}
+
+/* Main content layout inside the right-hand side of the app. */
+.content {
+  padding: 28px;
+  display: grid;
+  gap: 20px;
+}
+
+/* Top banner area of the catalog page. */
+.hero {
+  padding: 28px;
+  background:
+    radial-gradient(circle at top right, rgba(29, 185, 84, 0.24), transparent 28%),
+    linear-gradient(180deg, rgba(34, 34, 34, 0.96), rgba(18, 18, 18, 0.96));
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  color: #8de8ac;
+}
+
+.wide {
+  padding: 18px;
+}
+
+/* Grid layout for all catalog filter inputs. */
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+/* Responsive grid for the song cards. */
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 18px;
+}
+
+/* Individual song card styling. */
+.song-card {
+  padding: 14px;
+  display: grid;
+  gap: 12px;
+}
+
+.song-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: #0f0f0f;
+}
+
+.song-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.song-meta {
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.song-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.song-actions select {
+  flex: 1;
+  min-width: 140px;
+  background: #101010;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 12px;
+}
+
+/* Message shown when no songs match the filters. */
+.empty-state {
+  padding: 20px;
+  border: 1px dashed rgba(255, 255, 255, 0.16);
+  border-radius: 18px;
+  color: var(--muted);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Floating notification box used for quick feedback. */
+.toast {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: rgba(18, 18, 18, 0.94);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}
+
+.small {
+  font-size: 12px;
+}
+
+/* Responsive adjustments for medium-width screens. */
+@media (max-width: 1100px) {
+  .filter-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .app-screen {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+}
+
+@media (max-width: 700px) {
+  .filter-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .inline-form {
+    grid-template-columns: 1fr;
+  }
+
+  .content,
+  .sidebar {
+    padding: 16px;
+  }
+}
+
+
+/* Additional later overrides.
+   These rules appear later in the file, so they override earlier values when selectors match. */
+.content {
+  padding: 24px;
+}
+.hero,
+.filters {
+  padding: 22px;
+}
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  color: var(--green);
+}
+.filter-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.catalog-section {
+  margin-top: 20px;
+}
+.song-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 16px;
+}
+.song-card {
+  padding: 16px;
+  display: grid;
+  gap: 14px;
+}
+.song-card img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+  background: #0e0e0e;
+}
+.song-title {
+  font-weight: 700;
+  font-size: 18px;
+}
+.song-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.playlist-select {
+  min-width: 150px;
+  background: #101010;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 10px 12px;
+}
+.playlist-list {
+  display: grid;
+  gap: 12px;
+  margin-top: 14px;
+}
+.playlist-card {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 14px;
+}
+.playlist-card-header,
+.playlist-song-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+.playlist-song-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 12px;
+}
+.empty-state {
+  padding: 22px;
+  border: 1px dashed var(--line);
+  border-radius: 18px;
+  color: var(--muted);
+  background: rgba(255,255,255,0.02);
+}
+.toast {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  padding: 12px 16px;
+  border-radius: 14px;
+  z-index: 1000;
+  color: white;
+  box-shadow: var(--shadow);
+}
+.toast.success { background: rgba(29, 185, 84, 0.92); }
+.toast.error { background: rgba(239, 68, 68, 0.92); }
+/* Final small-screen override block. */
+@media (max-width: 980px) {
+  .app-screen { grid-template-columns: 1fr; }
+  .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
+  .filter-grid { grid-template-columns: 1fr; }
+}
