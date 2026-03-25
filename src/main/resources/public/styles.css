@@ -1,3 +1,5 @@
+/* Global color variables and reusable design tokens.
+   These custom properties make the theme easier to maintain. */
 :root {
   --bg: #0c0c0c;
   --surface: #151515;
@@ -12,10 +14,12 @@
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
+/* Base reset rules used across the whole page. */
 * {
   box-sizing: border-box;
 }
 
+/* Main page background, font, and default text color. */
 body {
   margin: 0;
   font-family: Inter, Arial, Helvetica, sans-serif;
@@ -27,6 +31,7 @@ body {
 }
 
 button,
+/* Shared input styling for text fields and textareas. */
 input,
 textarea {
   font: inherit;
@@ -37,6 +42,7 @@ button {
   border: 0;
 }
 
+/* Utility class for elements that should be visually hidden. */
 .hidden {
   display: none !important;
 }
@@ -45,12 +51,14 @@ button {
   min-height: 100vh;
 }
 
+/* Layout for the centered authentication screen. */
 .auth-screen {
   display: grid;
   place-items: center;
   padding: 24px;
 }
 
+/* Card that holds the login and sign-up forms. */
 .auth-card {
   width: min(420px, 100%);
   background: rgba(18, 18, 18, 0.88);
@@ -92,6 +100,7 @@ button {
   color: var(--muted);
 }
 
+/* Reusable logo styling for the music note icon. */
 .brand-logo {
   width: 58px;
   height: 58px;
@@ -111,6 +120,7 @@ button {
   border-radius: 14px;
 }
 
+/* Tab switcher for login vs sign-up. */
 .tabs {
   display: flex;
   background: var(--surface-2);
@@ -138,6 +148,7 @@ button {
   gap: 14px;
 }
 
+/* Form field label styling. */
 label {
   display: grid;
   gap: 8px;
@@ -161,6 +172,7 @@ textarea:focus {
   box-shadow: 0 0 0 3px rgba(29, 185, 84, 0.15);
 }
 
+/* Shared button shape and motion styling. */
 .primary-btn,
 .ghost-btn,
 .danger-btn,
@@ -207,11 +219,13 @@ textarea:focus {
   font-size: 14px;
 }
 
+/* Two-column layout for the main app screen. */
 .app-screen {
   display: grid;
   grid-template-columns: 320px 1fr;
 }
 
+/* Left sidebar for branding and user information. */
 .sidebar {
   background: rgba(10, 10, 10, 0.96);
   border-right: 1px solid var(--line);
@@ -223,6 +237,7 @@ textarea:focus {
   gap: 18px;
 }
 
+/* Shared card styling used by several panels in the UI. */
 .user-card,
 .panel,
 .song-card,
@@ -260,6 +275,8 @@ textarea:focus {
   height: 18px;
 }
 
+/* Playlist-related components.
+   Some of these styles remain from a broader version of the UI. */
 .playlist-list {
   display: grid;
   gap: 10px;
@@ -294,12 +311,14 @@ textarea:focus {
   padding: 8px 10px;
 }
 
+/* Main content layout inside the right-hand side of the app. */
 .content {
   padding: 28px;
   display: grid;
   gap: 20px;
 }
 
+/* Top banner area of the catalog page. */
 .hero {
   padding: 28px;
   background:
@@ -318,18 +337,21 @@ textarea:focus {
   padding: 18px;
 }
 
+/* Grid layout for all catalog filter inputs. */
 .filter-grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 12px;
 }
 
+/* Responsive grid for the song cards. */
 .song-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 18px;
 }
 
+/* Individual song card styling. */
 .song-card {
   padding: 14px;
   display: grid;
@@ -371,6 +393,7 @@ textarea:focus {
   padding: 10px 12px;
 }
 
+/* Message shown when no songs match the filters. */
 .empty-state {
   padding: 20px;
   border: 1px dashed rgba(255, 255, 255, 0.16);
@@ -379,6 +402,7 @@ textarea:focus {
   background: rgba(255, 255, 255, 0.02);
 }
 
+/* Floating notification box used for quick feedback. */
 .toast {
   position: fixed;
   top: 18px;
@@ -395,6 +419,7 @@ textarea:focus {
   font-size: 12px;
 }
 
+/* Responsive adjustments for medium-width screens. */
 @media (max-width: 1100px) {
   .filter-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -428,6 +453,8 @@ textarea:focus {
 }
 
 
+/* Additional later overrides.
+   These rules appear later in the file, so they override earlier values when selectors match. */
 .content {
   padding: 24px;
 }
@@ -527,6 +554,7 @@ textarea:focus {
 }
 .toast.success { background: rgba(29, 185, 84, 0.92); }
 .toast.error { background: rgba(239, 68, 68, 0.92); }
+/* Final small-screen override block. */
 @media (max-width: 980px) {
   .app-screen { grid-template-columns: 1fr; }
   .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
