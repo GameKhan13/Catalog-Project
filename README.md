@@ -1,4 +1,4 @@
-# Sprint 2 – Catalog browser
+# Iteration 2 – Catalog browser
 
 This milestone adds the first real product screen after authentication.
 
