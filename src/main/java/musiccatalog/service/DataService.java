@@ -35,13 +35,13 @@ public class DataService {
             Files.createDirectories(IMAGE_DIR);
 
             if (Files.notExists(USERS_CSV)) {
-                Files.writeString(USERS_CSV, "id,username,passwordHash,isAdmin\n", StandardCharsets.UTF_8);
+                userService.writeHeader(USERS_CSV);
             }
             if (Files.notExists(SONGS_CSV)) {
-                Files.writeString(SONGS_CSV, "id,title,artist,album,year,genre,lyrics,imageFile\n", StandardCharsets.UTF_8);
+                songService.writeHeader(SONGS_CSV);
             }
             if (Files.notExists(PLAYLISTS_CSV)) {
-                Files.writeString(PLAYLISTS_CSV, "id,name,ownerUserId,isGlobal,songIds\n", StandardCharsets.UTF_8);
+                playlistService.writeHeader(PLAYLISTS_CSV);
             }
 
             seedImages();

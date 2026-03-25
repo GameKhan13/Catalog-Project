@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -26,6 +27,11 @@ public class PlaylistService {
     private final String ownerHeader = "ownerUserId";
     private final String scopeHeader = "scope";
     private final String songsHeader = "songs";
+
+    public void writeHeader(Path path) throws IOException {
+        Files.writeString(path, String.join(",", idHeader, nameHeader, ownerHeader, scopeHeader, songsHeader), StandardCharsets.UTF_8);
+        Files.writeString(path, "\n");
+    }
 
     public synchronized List<Playlist> getAllPlaylists() throws IOException {
         List<Playlist> playlists = new ArrayList<>();

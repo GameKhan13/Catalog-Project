@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -27,6 +28,11 @@ public class UserService {
     private final String usernameHeader = "username";
     private final String passwordHeader = "password";
     private final String permissionHeader = "permission";
+
+    public void writeHeader(Path path) throws IOException {
+        Files.writeString(path, String.join(",", idHeader, usernameHeader, passwordHeader, permissionHeader), StandardCharsets.UTF_8);
+        Files.writeString(path, "\n");
+    }
 
     /**
      * @return a {@code List<User>} that contains all users that exist

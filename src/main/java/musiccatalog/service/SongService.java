@@ -5,6 +5,7 @@ import java.io.Reader;
 import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -30,6 +31,11 @@ public class SongService {
     private final String yearHeader = "year";
     private final String genreHeader = "genre";
     private final String imageHeader = "imageName";
+
+    public void writeHeader(Path path) throws IOException {
+        Files.writeString(path, String.join(",", idHeader, titleHeader, artistHeader, albumHeader, yearHeader, genreHeader, imageHeader), StandardCharsets.UTF_8);
+        Files.writeString(path, "\n");
+    }
 
     /**
      * @return a {@code List<Song>} that contains all songs that exist
