@@ -1,10 +1,5 @@
 package musiccatalog.service;
 
-import musiccatalog.model.Song;
-import musiccatalog.model.User;
-import musiccatalog.util.IdUtil;
-import org.mindrot.jbcrypt.BCrypt;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -12,18 +7,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-public class DataBootstrapService {
-    public static final Path DATA_DIR = Paths.get("data");
-    public static final Path IMAGE_DIR = DATA_DIR.resolve("images");
-    public static final Path USERS_CSV = DATA_DIR.resolve("users.csv");
-    public static final Path SONGS_CSV = DATA_DIR.resolve("songs.csv");
-    public static final Path PLAYLISTS_CSV = DATA_DIR.resolve("playlists.csv");
+import org.mindrot.jbcrypt.BCrypt;
+
+import musiccatalog.model.Song;
+import musiccatalog.model.User;
+
+public class DataService {
+    public static final Path DATA_DIR = Paths.get("src\\main\\resources");
+    public static final Path IMAGE_DIR = DATA_DIR.resolve("public\\images");
+    public static final Path USERS_CSV = DATA_DIR.resolve("private\\users.csv");
+    public static final Path SONGS_CSV = DATA_DIR.resolve("private\\songs.csv");
+    public static final Path PLAYLISTS_CSV = DATA_DIR.resolve("private\\playlists.csv");
 
     private final UserService userService;
     private final SongService songService;
     private final PlaylistService playlistService;
 
-    public DataBootstrapService(UserService userService, SongService songService, PlaylistService playlistService) {
+    public DataService(UserService userService, SongService songService, PlaylistService playlistService) {
         this.userService = userService;
         this.songService = songService;
         this.playlistService = playlistService;
@@ -70,46 +70,38 @@ public class DataBootstrapService {
             return;
         }
 
-        songService.createSong(new Song(
-                IdUtil.newId(),
+        songService.createSong(
                 "Blinding Lights",
                 "The Weeknd",
                 "After Hours",
                 2020,
                 "Synth-Pop",
-                "I said, ooh, I'm blinded by the lights...",
                 "weeknd.svg"
-        ));
-        songService.createSong(new Song(
-                IdUtil.newId(),
+        );
+        songService.createSong(
                 "Levitating",
                 "Dua Lipa",
                 "Future Nostalgia",
                 2020,
                 "Pop",
-                "You want me, I want you, baby...",
                 "dua.svg"
-        ));
-        songService.createSong(new Song(
-                IdUtil.newId(),
+        );
+        songService.createSong(
                 "N95",
                 "Kendrick Lamar",
                 "Mr. Morale & the Big Steppers",
                 2022,
                 "Hip-Hop",
-                "Hello, new world, all the boys and girls...",
                 "kendrick.svg"
-        ));
-        songService.createSong(new Song(
-                IdUtil.newId(),
+        );
+        songService.createSong(
                 "Electric Feel",
                 "MGMT",
                 "Oracular Spectacular",
                 2007,
                 "Indie",
-                "All along the western front...",
                 "mgmt.svg"
-        ));
+        );
     }
 
     private void seedImages() throws IOException {

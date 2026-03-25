@@ -1,5 +1,8 @@
 package musiccatalog.model;
 
+/**
+ * Object that represents a song
+ */
 public class Song {
     private String id;
     private String title;
@@ -7,19 +10,15 @@ public class Song {
     private String album;
     private int year;
     private String genre;
-    private String lyrics;
     private String imageFile;
 
-    public Song() {}
-
-    public Song(String id, String title, String artist, String album, int year, String genre, String lyrics, String imageFile) {
+    public Song(String id, String title, String artist, String album, int year, String genre, String imageFile) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.album = album;
         this.year = year;
         this.genre = genre;
-        this.lyrics = lyrics;
         this.imageFile = imageFile;
     }
 
@@ -69,14 +68,6 @@ public class Song {
 
     public void setGenre(String genre) {
         this.genre = genre;
-    }
-
-    public String getLyrics() {
-        return lyrics;
-    }
-
-    public void setLyrics(String lyrics) {
-        this.lyrics = lyrics;
     }
 
     public String getImageFile() {

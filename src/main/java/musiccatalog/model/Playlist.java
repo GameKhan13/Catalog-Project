@@ -3,14 +3,15 @@ package musiccatalog.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Object that represents a playlist
+ */
 public class Playlist {
     private String id;
     private String name;
     private String ownerUserId;
     private boolean global;
     private List<String> songIds = new ArrayList<>();
-
-    public Playlist() {}
 
     public Playlist(String id, String name, String ownerUserId, boolean global, List<String> songIds) {
         this.id = id;
@@ -56,6 +57,11 @@ public class Playlist {
         return songIds;
     }
 
+    /**
+     * Sets the songs contained in this object to the list <br>
+     * For adding single songs or a list of songs use {@code getSongs().add(Song) || getSongs().addAll(<List<Song>)}
+     * @param songIds
+     */
     public void setSongIds(List<String> songIds) {
         this.songIds = songIds;
     }

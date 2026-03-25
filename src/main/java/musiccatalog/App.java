@@ -13,7 +13,7 @@ import musiccatalog.model.Playlist;
 import musiccatalog.model.Song;
 import musiccatalog.model.User;
 import musiccatalog.security.SessionService;
-import musiccatalog.service.DataBootstrapService;
+import musiccatalog.service.DataService;
 import musiccatalog.service.PlaylistService;
 import musiccatalog.service.SongService;
 import musiccatalog.service.UserService;
@@ -38,7 +38,7 @@ public class App {
         SongService songService = new SongService();
         PlaylistService playlistService = new PlaylistService();
         SessionService sessionService = new SessionService();
-        DataBootstrapService bootstrapService = new DataBootstrapService(userService, songService, playlistService);
+        DataService bootstrapService = new DataService(userService, songService, playlistService);
         bootstrapService.initialize();
 
         before((req, res) -> res.type("application/json"));
@@ -47,9 +47,9 @@ public class App {
 
         get("/song-images/:file", (req, res) -> {
             String fileName = req.params("file");
-            Path imagePath = DataBootstrapService.IMAGE_DIR.resolve(fileName).normalize();
-            if (!Files.exists(imagePath) || !imagePath.startsWith(DataBootstrapService.IMAGE_DIR)) {
-                imagePath = DataBootstrapService.IMAGE_DIR.resolve("default.svg");
+            Path imagePath = DataService.IMAGE_DIR.resolve(fileName).normalize();
+            if (!Files.exists(imagePath) || !imagePath.startsWith(DataService.IMAGE_DIR)) {
+                imagePath = DataService.IMAGE_DIR.resolve("default.svg");
             }
             String lower = imagePath.getFileName().toString().toLowerCase();
             if (lower.endsWith(".svg")) {
@@ -114,14 +114,28 @@ public class App {
             requireAdmin(req.headers("Authorization"), sessionService);
             Song song = parseSongForCreate(bodyMap(req.body()));
             song.setId(IdUtil.newId());
-            songService.createSong(song);
+            songService.createSong(
+                song.getTitle(),
+                song.getArtist(),
+                song.getAlbum(),
+                song.getYear(),
+                song.getGenre(),
+                song.getImageFile()
+            );
             return json(song);
         });
 
         put("/api/admin/songs/:id", (req, res) -> {
             requireAdmin(req.headers("Authorization"), sessionService);
             Song updatedSong = parseSongForCreate(bodyMap(req.body()));
-            Song saved = songService.updateSong(req.params("id"), updatedSong);
+            Song saved = songService.updateSong(req.params("id"), 
+                updatedSong.getTitle(),
+                updatedSong.getArtist(),
+                updatedSong.getAlbum(),
+                updatedSong.getYear(),
+                updatedSong.getGenre(),
+                updatedSong.getImageFile()
+            );
             return json(saved);
         });
 
@@ -257,7 +271,7 @@ public class App {
         if (imageFile.isBlank()) {
             imageFile = "default.svg";
         }
-        return new Song(null, title, artist, album, year, genre, lyrics, imageFile);
+        return new Song(null, title, artist, album, year, genre, imageFile);
     }
 
     private static void validateUsername(String username) {

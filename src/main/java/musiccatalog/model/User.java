@@ -1,12 +1,14 @@
 package musiccatalog.model;
 
+/**
+ * Object that represents a user <br>
+ * Passwords should be hashed before creation (no hashing is done within the object)
+ */
 public class User {
     private String id;
     private String username;
     private String passwordHash;
     private boolean admin;
-
-    public User() {}
 
     public User(String id, String username, String passwordHash, boolean admin) {
         this.id = id;
