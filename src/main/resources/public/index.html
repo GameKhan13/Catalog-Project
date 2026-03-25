@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Standard page metadata and responsive viewport settings. -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Browser tab title. -->
+  <title>Pulseify</title>
+
+  <!-- Main stylesheet for the whole front end. -->
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+<!-- Toast container used for small success and error notifications. -->
+<div id="toast" class="toast hidden"></div>
+
+<!-- Authentication screen shown when the user is not logged in. -->
+<section id="authScreen" class="screen auth-screen">
+  <div class="auth-card">
+    <!-- Brand area at the top of the auth card. -->
+    <div class="brand-block">
+      <div class="brand-logo">♪</div>
+      <div>
+        <h1>Pulseify</h1>
+      </div>
+    </div>
+
+    <!-- Buttons that switch between login mode and sign-up mode. -->
+    <div class="tabs">
+      <button id="loginTab" class="tab active">Login</button>
+      <button id="signupTab" class="tab">Sign Up</button>
+    </div>
+
+    <!-- Login form. -->
+    <form id="loginForm" class="auth-form">
+      <label>Username<input id="loginUsername" type="text" required /></label>
+      <label>Password<input id="loginPassword" type="password" required /></label>
+      <button type="submit" class="primary-btn">Login</button>
+    </form>
+
+    <!-- Sign-up form starts hidden and is shown when the sign-up tab is active. -->
+    <form id="signupForm" class="auth-form hidden">
+      <label>Username<input id="signupUsername" type="text" minlength="3" maxlength="20" required /></label>
+      <label>Password<input id="signupPassword" type="password" minlength="6" required /></label>
+      <button type="submit" class="primary-btn">Create account</button>
+    </form>
+  </div>
+</section>
+
+<!-- Main application screen shown after login. -->
+<section id="appScreen" class="screen app-screen hidden">
+  <aside class="sidebar">
+    <div>
+      <!-- Small brand block inside the app sidebar. -->
+      <div class="sidebar-brand">
+        <div class="brand-logo small">♪</div>
+        <div>
+          <h2>Pulseify</h2>
+        </div>
+      </div>
+
+      <!-- Logged-in user summary and logout button. -->
+      <div class="user-card">
+        <div>
+          <strong id="currentUsername"></strong>
+          <p id="currentRole"></p>
+        </div>
+        <button id="logoutBtn" class="ghost-btn">Logout</button>
+  </aside>
+
+  <!-- Main content area for browsing the song catalog. -->
+  <main class="content">
+    <header class="hero">
+      <div>
+        <p class="eyebrow">Catalog browser</p>
+        <h1>Browse music</h1>
+      </div>
+    </header>
+
+    <!-- Filter section. Each input narrows the song list on the client side. -->
+    <section class="filters panel wide">
+      <div class="filter-grid">
+        <input id="searchInput" type="text" placeholder="Search across the catalog" />
+        <input id="artistFilter" type="text" placeholder="Filter by artist" />
+        <input id="titleFilter" type="text" placeholder="Filter by title" />
+        <input id="genreFilter" type="text" placeholder="Filter by genre" />
+        <input id="albumFilter" type="text" placeholder="Filter by album" />
+        <input id="yearFilter" type="number" placeholder="Filter by year" />
+      </div>
+    </section>
+
+    <!-- Catalog results area. JavaScript fills the grid dynamically. -->
+    <section class="catalog-section">
+      <div class="section-title-row">
+        <h2>Catalog</h2>
+        <span id="songCount"></span>
+      </div>
+      <div id="songGrid" class="song-grid"></div>
+    </section>
+  </main>
+</section>
+
+<!-- Main front-end script loaded after the page markup. -->
+<script src="/app.js"></script>
+</body>
+</html>
