@@ -45,6 +45,7 @@ const el = {
   signupUsername: document.getElementById('signupUsername'),
   signupPassword: document.getElementById('signupPassword'),
   signupIsAdmin: document.getElementById('signupIsAdmin'),
+  filtersButton: document.getElementById('filtersButton'),
 };
 
 function setAuth(token, user) {
@@ -508,6 +509,16 @@ el.playlistList.addEventListener('click', async (event) => {
     }
   } catch (error) {
     showToast(error.message, true);
+  }
+});
+
+el.filtersButton.addEventListener("click", function() {
+  this.classList.toggle("active");
+  var content = this.parentElement.nextElementSibling;
+  if (content.classList.contains("open")) {
+    content.classList.remove("open");
+  } else {
+    content.classList.add("open");
   }
 });
 
