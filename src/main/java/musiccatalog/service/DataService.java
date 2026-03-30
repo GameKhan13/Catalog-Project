@@ -13,11 +13,13 @@ import musiccatalog.model.Song;
 import musiccatalog.model.User;
 
 public class DataService {
-    public static final Path DATA_DIR = Paths.get("src\\main\\resources");
-    public static final Path IMAGE_DIR = DATA_DIR.resolve("public\\images");
-    public static final Path USERS_CSV = DATA_DIR.resolve("private\\users.csv");
-    public static final Path SONGS_CSV = DATA_DIR.resolve("private\\songs.csv");
-    public static final Path PLAYLISTS_CSV = DATA_DIR.resolve("private\\playlists.csv");
+    public static final Path DATA_DIR = Paths.get("src", "main", "resources");
+    public static final Path PUBLIC_DIR = DATA_DIR.resolve("public");
+    public static final Path PRIVATE_DIR = DATA_DIR.resolve("private");
+    public static final Path IMAGE_DIR = PUBLIC_DIR.resolve("images");
+    public static final Path USERS_CSV = PRIVATE_DIR.resolve("users.csv");
+    public static final Path SONGS_CSV = PRIVATE_DIR.resolve("songs.csv");
+    public static final Path PLAYLISTS_CSV = PRIVATE_DIR.resolve("playlists.csv");
 
     private final UserService userService;
     private final SongService songService;
@@ -31,24 +33,25 @@ public class DataService {
 
     public void initialize() {
         try {
-            Files.createDirectories(DATA_DIR);
+            Files.createDirectories(PUBLIC_DIR);
+            Files.createDirectories(PRIVATE_DIR);
             Files.createDirectories(IMAGE_DIR);
 
-            if (Files.notExists(USERS_CSV)) {
-                userService.writeHeader(USERS_CSV);
-            }
-            if (Files.notExists(SONGS_CSV)) {
-                songService.writeHeader(SONGS_CSV);
-            }
-            if (Files.notExists(PLAYLISTS_CSV)) {
-                playlistService.writeHeader(PLAYLISTS_CSV);
-            }
+            ensureFileHasHeader(USERS_CSV, userService.headerLine());
+            ensureFileHasHeader(SONGS_CSV, songService.headerLine());
+            ensureFileHasHeader(PLAYLISTS_CSV, playlistService.headerLine());
 
             seedImages();
             seedDefaultAdmin();
             seedSampleSongs();
         } catch (IOException e) {
             throw new RuntimeException("Failed to initialize data files", e);
+        }
+    }
+
+    private void ensureFileHasHeader(Path file, String headerLine) throws IOException {
+        if (Files.notExists(file) || Files.size(file) == 0L) {
+            Files.writeString(file, headerLine + System.lineSeparator(), StandardCharsets.UTF_8);
         }
     }
 
@@ -70,38 +73,46 @@ public class DataService {
             return;
         }
 
-        songService.createSong(
+        songService.createSong(new Song(
+                null,
                 "Blinding Lights",
                 "The Weeknd",
                 "After Hours",
                 2020,
                 "Synth-Pop",
+                "I said, ooh, I am blinded by the lights...",
                 "weeknd.svg"
-        );
-        songService.createSong(
+        ));
+        songService.createSong(new Song(
+                null,
                 "Levitating",
                 "Dua Lipa",
                 "Future Nostalgia",
                 2020,
                 "Pop",
+                "You want me, I want you, baby...",
                 "dua.svg"
-        );
-        songService.createSong(
+        ));
+        songService.createSong(new Song(
+                null,
                 "N95",
                 "Kendrick Lamar",
                 "Mr. Morale & the Big Steppers",
                 2022,
                 "Hip-Hop",
+                "Hello, new world, all the boys and girls...",
                 "kendrick.svg"
-        );
-        songService.createSong(
+        ));
+        songService.createSong(new Song(
+                null,
                 "Electric Feel",
                 "MGMT",
                 "Oracular Spectacular",
                 2007,
                 "Indie",
+                "All along the western front...",
                 "mgmt.svg"
-        );
+        ));
     }
 
     private void seedImages() throws IOException {

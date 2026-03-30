@@ -1,26 +1,65 @@
-# Sprint 4 – Full admin prototype
+# Catalog-Project Upgraded to Music-Catalog-App Functionality
 
-This is the full working version.
+This version keeps the Catalog-Project visual style and dataset, but upgrades it to match the working feature depth of `music-catalog-app`.
 
-Included:
-- Login page
-- Sign up page
-- Main catalog page
-- Search/filter by title, artist, genre, album, year, and lyrics
-- Personal playlists
-- Global playlists
-- Admin song add/edit/delete
-- Dynamic image support from the local folder
+## What this version now supports
+
+- Login and logout
+- Sign up for normal accounts
+- Sign up for admin accounts from the sign-up screen
+- Session restore after refresh using local storage
+- Song catalog with search and filtering by:
+  - title
+  - artist
+  - genre
+  - album
+  - year
+  - lyrics through the main search box
+- Playlist management:
+  - create playlists
+  - rename playlists
+  - delete playlists
+  - add songs to playlists
+  - remove songs from playlists
+- Admin controls:
+  - add songs
+  - edit songs
+  - delete songs
+  - create global playlists
+- Dynamic image support using files in `src/main/resources/public/images`
 - CSV persistence for users, songs, and playlists
+- Backward-compatible CSV reading for the older Catalog-Project headers and the newer music-catalog-app headers
 
-Run:
+## Run
+
 ```bash
 mvn compile exec:java
 ```
 
-Open:
-- http://localhost:4570
+Then open:
 
-Default admin:
-- username: admin
-- password: admin123
+```text
+http://localhost:4570
+```
+
+## Default seeded admin
+
+- Username: `admin`
+- Password: `admin123`
+
+## Data files used by this build
+
+- `src/main/resources/private/users.csv`
+- `src/main/resources/private/songs.csv`
+- `src/main/resources/private/playlists.csv`
+- `src/main/resources/public/images`
+
+## Notes
+
+- Existing Catalog-Project songs and images are preserved.
+- When song or user data is rewritten, it is normalized to the newer standardized headers.
+- The admin sign-up checkbox is intentionally open because that was explicitly requested. It is useful for demos, but not secure for production.
+
+## Documentation
+
+A full upgrade log is included in `UPGRADE_CHANGELOG.md`.

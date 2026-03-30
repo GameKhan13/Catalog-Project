@@ -560,3 +560,33 @@ textarea:focus {
   .sidebar { border-right: 0; border-bottom: 1px solid var(--line); }
   .filter-grid { grid-template-columns: 1fr; }
 }
+
+
+.playlist-subline {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 6px;
+}
+
+.playlist-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+.playlist-badge.personal {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+}
+
+.playlist-badge.global {
+  background: rgba(29, 185, 84, 0.18);
+  color: #9bf2b7;
+}

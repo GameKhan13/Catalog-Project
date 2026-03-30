@@ -17,8 +17,8 @@ import musiccatalog.service.DataService;
 import musiccatalog.service.PlaylistService;
 import musiccatalog.service.SongService;
 import musiccatalog.service.UserService;
-import musiccatalog.util.IdUtil;
 import musiccatalog.util.JsonUtil;
+
 import static spark.Spark.before;
 import static spark.Spark.delete;
 import static spark.Spark.exception;
@@ -70,6 +70,7 @@ public class App {
             Map<String, Object> body = bodyMap(req.body());
             String username = safe(body.get("username"));
             String password = safe(body.get("password"));
+            boolean isAdmin = Boolean.parseBoolean(safe(body.get("isAdmin")));
 
             validateUsername(username);
             validatePassword(password);
@@ -78,7 +79,7 @@ public class App {
                 haltWithJson(409, "Username already exists");
             }
 
-            User user = userService.createUser(username, BCrypt.hashpw(password, BCrypt.gensalt()), false);
+            User user = userService.createUser(username, BCrypt.hashpw(password, BCrypt.gensalt()), isAdmin);
             String token = sessionService.createSession(user);
             return json(authPayload(user, token));
         });
@@ -113,29 +114,14 @@ public class App {
         post("/api/admin/songs", (req, res) -> {
             requireAdmin(req.headers("Authorization"), sessionService);
             Song song = parseSongForCreate(bodyMap(req.body()));
-            song.setId(IdUtil.newId());
-            songService.createSong(
-                song.getTitle(),
-                song.getArtist(),
-                song.getAlbum(),
-                song.getYear(),
-                song.getGenre(),
-                song.getImageFile()
-            );
-            return json(song);
+            Song created = songService.createSong(song);
+            return json(created);
         });
 
         put("/api/admin/songs/:id", (req, res) -> {
             requireAdmin(req.headers("Authorization"), sessionService);
             Song updatedSong = parseSongForCreate(bodyMap(req.body()));
-            Song saved = songService.updateSong(req.params("id"), 
-                updatedSong.getTitle(),
-                updatedSong.getArtist(),
-                updatedSong.getAlbum(),
-                updatedSong.getYear(),
-                updatedSong.getGenre(),
-                updatedSong.getImageFile()
-            );
+            Song saved = songService.updateSong(req.params("id"), updatedSong);
             return json(saved);
         });
 
@@ -271,7 +257,7 @@ public class App {
         if (imageFile.isBlank()) {
             imageFile = "default.svg";
         }
-        return new Song(null, title, artist, album, year, genre, imageFile);
+        return new Song(null, title, artist, album, year, genre, lyrics, imageFile);
     }
 
     private static void validateUsername(String username) {
