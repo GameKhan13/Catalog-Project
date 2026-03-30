@@ -1,24 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Standard page metadata and responsive viewport settings. -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <!-- Browser tab title. -->
   <title>Pulseify</title>
-
-  <!-- Main stylesheet for the whole front end. -->
   <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
-<!-- Toast container used for small success and error notifications. -->
 <div id="toast" class="toast hidden"></div>
 
-<!-- Authentication screen shown when the user is not logged in. -->
 <section id="authScreen" class="screen auth-screen">
   <div class="auth-card">
-    <!-- Brand area at the top of the auth card. -->
     <div class="brand-block">
       <div class="brand-logo">♪</div>
       <div>
@@ -26,33 +18,44 @@
       </div>
     </div>
 
-    <!-- Buttons that switch between login mode and sign-up mode. -->
     <div class="tabs">
-      <button id="loginTab" class="tab active">Login</button>
-      <button id="signupTab" class="tab">Sign Up</button>
+      <button id="loginTab" class="tab active" type="button">Login</button>
+      <button id="signupTab" class="tab" type="button">Sign Up</button>
     </div>
 
-    <!-- Login form. -->
     <form id="loginForm" class="auth-form">
-      <label>Username<input id="loginUsername" type="text" required /></label>
-      <label>Password<input id="loginPassword" type="password" required /></label>
+      <label>
+        Username
+        <input id="loginUsername" type="text" autocomplete="username" required />
+      </label>
+      <label>
+        Password
+        <input id="loginPassword" type="password" autocomplete="current-password" required />
+      </label>
       <button type="submit" class="primary-btn">Login</button>
     </form>
 
-    <!-- Sign-up form starts hidden and is shown when the sign-up tab is active. -->
     <form id="signupForm" class="auth-form hidden">
-      <label>Username<input id="signupUsername" type="text" minlength="3" maxlength="20" required /></label>
-      <label>Password<input id="signupPassword" type="password" minlength="6" required /></label>
+      <label>
+        Username
+        <input id="signupUsername" type="text" minlength="3" maxlength="20" required />
+      </label>
+      <label>
+        Password
+        <input id="signupPassword" type="password" minlength="6" required />
+      </label>
+      <label class="checkbox-row">
+        <input id="signupIsAdmin" type="checkbox" />
+        <span>Create as admin account</span>
+      </label>
       <button type="submit" class="primary-btn">Create account</button>
     </form>
   </div>
 </section>
 
-<!-- Main application screen shown after login. -->
 <section id="appScreen" class="screen app-screen hidden">
   <aside class="sidebar">
     <div>
-      <!-- Small brand block inside the app sidebar. -->
       <div class="sidebar-brand">
         <div class="brand-logo small">♪</div>
         <div>
@@ -60,16 +63,51 @@
         </div>
       </div>
 
-      <!-- Logged-in user summary and logout button. -->
       <div class="user-card">
         <div>
           <strong id="currentUsername"></strong>
           <p id="currentRole"></p>
         </div>
         <button id="logoutBtn" class="ghost-btn">Logout</button>
+      </div>
+
+      <section class="panel">
+        <div class="panel-title-row">
+          <h3>Playlists</h3>
+        </div>
+        <form id="playlistForm" class="stack-form">
+          <input id="playlistName" type="text" placeholder="New playlist name" required />
+          <label id="globalPlaylistRow" class="checkbox-row hidden">
+            <input id="playlistIsGlobal" type="checkbox" />
+            <span>Create as a global admin playlist</span>
+          </label>
+          <button type="submit" class="primary-btn compact">Create</button>
+        </form>
+        <div id="playlistList" class="playlist-list"></div>
+      </section>
+
+      <section id="adminPanel" class="panel hidden">
+        <div class="panel-title-row">
+          <h3>Admin Controls</h3>
+        </div>
+        <form id="songForm" class="stack-form">
+          <input id="songId" type="hidden" />
+          <input id="songTitle" type="text" placeholder="Song title" required />
+          <input id="songArtist" type="text" placeholder="Artist" required />
+          <input id="songAlbum" type="text" placeholder="Album" />
+          <input id="songYear" type="number" placeholder="Year" min="0" max="9999" required />
+          <input id="songGenre" type="text" placeholder="Genre" />
+          <input id="songImageFile" type="text" placeholder="Image filename, e.g. weeknd.svg" />
+          <textarea id="songLyrics" rows="4" placeholder="Lyrics used by the main search"></textarea>
+          <div class="button-row">
+            <button type="submit" class="primary-btn compact">Save Song</button>
+            <button id="clearSongBtn" type="button" class="ghost-btn compact">Clear</button>
+          </div>
+        </form>
+      </section>
+    </div>
   </aside>
 
-  <!-- Main content area for browsing the song catalog. -->
   <main class="content">
     <header class="hero">
       <div>
@@ -78,10 +116,9 @@
       </div>
     </header>
 
-    <!-- Filter section. Each input narrows the song list on the client side. -->
     <section class="filters panel wide">
       <div class="filter-grid">
-        <input id="searchInput" type="text" placeholder="Search across the catalog" />
+        <input id="searchInput" type="text" placeholder="Search title, artist, album, genre, year, or lyrics" />
         <input id="artistFilter" type="text" placeholder="Filter by artist" />
         <input id="titleFilter" type="text" placeholder="Filter by title" />
         <input id="genreFilter" type="text" placeholder="Filter by genre" />
@@ -90,7 +127,6 @@
       </div>
     </section>
 
-    <!-- Catalog results area. JavaScript fills the grid dynamically. -->
     <section class="catalog-section">
       <div class="section-title-row">
         <h2>Catalog</h2>
@@ -101,7 +137,6 @@
   </main>
 </section>
 
-<!-- Main front-end script loaded after the page markup. -->
 <script src="/app.js"></script>
 </body>
 </html>
