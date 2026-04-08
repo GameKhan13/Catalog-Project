@@ -12,7 +12,7 @@ import java.nio.charset.StandardCharsets;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AdminAccessSystemTest {
-    //BOTH SYSTEM TESTS REQUIRE THE APPLCAITION TO BE RUNNING!!
+    // BOTH SYSTEM TESTS REQUIRE THE APPLICATION TO BE RUNNING
 
     private static final String BASE_URL = "http://localhost:4570";
 
@@ -68,7 +68,6 @@ public class AdminAccessSystemTest {
     }
 
     private String signupAndGetToken(String username, String password) throws Exception {
-        // Arrange: build a signup request for a normal user.
         HttpURLConnection connection = openJsonConnection("/api/auth/signup", "POST", null);
 
         String jsonBody = """
@@ -78,22 +77,19 @@ public class AdminAccessSystemTest {
                 }
                 """.formatted(username, password);
 
-        // Act: send the signup request and capture the response.
         String responseBody = sendJson(connection, jsonBody);
 
-        // Assert: signup should succeed and return a valid token.
-        assertTrue(connection.getResponseCode() == 200 || connection.getResponseCode() == 201,
-                "Signup should succeed for a new normal user");
+        assertEquals(200, connection.getResponseCode(),
+                "Signup should succeed for a new normal user. Response was: " + responseBody);
 
         String token = extractToken(responseBody);
-        assertNotNull(token, "Signup response should contain a token");
+        assertNotNull(token, "Signup response should contain a token. Response was: " + responseBody);
         assertFalse(token.isBlank(), "Returned signup token should not be blank");
 
         return token;
     }
 
     private String loginAndGetToken(String username, String password) throws Exception {
-        // Arrange: build a login request for an existing user.
         HttpURLConnection connection = openJsonConnection("/api/auth/login", "POST", null);
 
         String jsonBody = """
@@ -103,15 +99,13 @@ public class AdminAccessSystemTest {
                 }
                 """.formatted(username, password);
 
-        // Act: send the login request and capture the response.
         String responseBody = sendJson(connection, jsonBody);
 
-        // Assert: login should succeed and return a valid token.
         assertEquals(200, connection.getResponseCode(),
-                "Login should succeed for a valid existing user");
+                "Login should succeed for a valid existing user. Response was: " + responseBody);
 
         String token = extractToken(responseBody);
-        assertNotNull(token, "Login response should contain a token");
+        assertNotNull(token, "Login response should contain a token. Response was: " + responseBody);
         assertFalse(token.isBlank(), "Returned login token should not be blank");
 
         return token;
@@ -120,9 +114,8 @@ public class AdminAccessSystemTest {
     @Test
     @DisplayName("ST-06-OB: Non-admin user is denied access to admin-only song creation")
     void createSong_withNonAdminUser_returnsAccessDenied() throws Exception {
-
-        // Arrange: sign up a normal user through the running application and get a real token.
-        String token = signupAndGetToken("user_st06_test", "password123");
+        String username = "u" + (System.currentTimeMillis() % 100000);
+        String token = signupAndGetToken(username, "password123");
 
         HttpURLConnection connection = openJsonConnection("/api/admin/songs", "POST", token);
 
@@ -138,19 +131,15 @@ public class AdminAccessSystemTest {
                 }
                 """;
 
-        // Act: send the admin-only create-song request as a normal authenticated user.
-        sendJson(connection, jsonBody);
+        String responseBody = sendJson(connection, jsonBody);
 
-        // Assert: the system should reject the request with forbidden access.
         assertEquals(403, connection.getResponseCode(),
-                "Non-admin users should be denied admin-only actions");
+                "Non-admin users should be denied admin-only actions. Response was: " + responseBody);
     }
 
     @Test
     @DisplayName("ST-07-OB: Admin user can successfully create a song")
     void createSong_withAdminUser_succeeds() throws Exception {
-
-        // Arrange: log in as a real admin user through the running application and get a real token.
         String token = loginAndGetToken("admin", "admin123");
 
         HttpURLConnection connection = openJsonConnection("/api/admin/songs", "POST", token);
@@ -167,11 +156,9 @@ public class AdminAccessSystemTest {
                 }
                 """;
 
-        // Act: send the admin-only create-song request as an authenticated admin user.
-        sendJson(connection, jsonBody);
+        String responseBody = sendJson(connection, jsonBody);
 
-        // Assert: the system should allow the request and return success.
         assertTrue(connection.getResponseCode() == 200 || connection.getResponseCode() == 201,
-                "Admin users should be allowed to perform admin-only actions");
+                "Admin users should be allowed to perform admin-only actions. Response was: " + responseBody);
     }
 }
