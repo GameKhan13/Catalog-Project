@@ -1,1 +1,13 @@
 id,name,ownerUserId,scope,songs
+6a543914-7956-4cfc-8142-b535a4f66faf,Test,843dff2c-b6d2-4dc7-89dd-5b7627f53877,false,1
+3933ab48-ea2f-416b-aeef-2c8084deb578,My Playlist,fd9a08d0-f193-44d9-9f3d-c23ab6ac393d,false,
+b8c9731f-f067-4f21-8be5-64864950f2f1,Updated Playlist,b42020c4-c1ab-45c0-87bc-76b82aa54369,false,
+5d839cd4-1f70-4117-b3f5-e90da01949e2,System Test Playlist,f43f6563-6a5b-49e8-8868-42b360ddac82,false,1
+190eb734-5180-4f46-8308-0cbb1f5826e0,Test,42d32a38-5fc0-4198-ab63-8ac2557e5f30,false,1
+304c6d1d-2fbd-4e76-bc88-d775d2eb259a,My Playlist,03943338-52cb-490d-9bce-ffa74763670b,false,
+3317ae5f-b95d-4924-bf82-13f8bcd58981,Updated Playlist,dc0c1694-a01a-4812-bfe5-f9cccd817d18,false,
+61dbd1e4-9ba4-47cc-b349-865ac0c22ed2,System Test Playlist,a83b09fb-8ef4-499f-9b63-d03e46e66f8e,false,1
+7527f6a1-6e9c-4add-955d-26c32b4c3549,Test,714395fc-4307-49d8-98cb-0545a9d6d0eb,false,1
+4510c05a-7a65-4509-a63d-2d0777bd3e70,My Playlist,50ae0f7f-ad00-485d-ac36-9a8da4655ae0,false,
+b95f9373-fe95-4149-9cdc-63d8cf1518ff,Updated Playlist,ab45c5f6-e24a-4c68-878b-0fe9fcdbc148,false,
+542091e3-5ece-4ccd-b8aa-d8813c72d8a4,System Test Playlist,a73e4f14-dfdc-4004-a942-a4a77517947e,false,1

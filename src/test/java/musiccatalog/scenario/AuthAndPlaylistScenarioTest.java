@@ -16,11 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.*;
 import org.mindrot.jbcrypt.BCrypt;
 
 import musiccatalog.App;
@@ -39,6 +35,7 @@ import static spark.Spark.stop;
  * methods directly. That makes them stronger evidence that the application
  * behaves correctly from the user's point of view.
  */
+@Disabled("Conflicts with externally running server on port 4570")
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class AuthAndPlaylistScenarioTest {
 
