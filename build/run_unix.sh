@@ -1,0 +1,2 @@
+cd "$(dirname "$0")"
+java -jar "musiccatalog-1.0.0-jar-with-dependencies.jar"

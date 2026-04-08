@@ -42,6 +42,16 @@ Then open:
 http://localhost:4570
 ```
 
+## Build For Deployment
+
+__Run__:
+```bash
+mvn clean package
+```
+__Then__:
+package the generated 'musiccatalog-1.0.0-jar-with-dependencies.jar' with 'data' in a new folder
+include the scripts required to run the jar
+
 ## Default seeded admin
 
 - Username: `admin`
@@ -49,13 +59,7 @@ http://localhost:4570
 
 ## Data files used by this build
 
-- `src/main/resources/private/users.csv`
-- `src/main/resources/private/songs.csv`
-- `src/main/resources/private/playlists.csv`
-- `src/main/resources/public/images`
-
-## Notes
-
-- Existing Catalog-Project songs and images are preserved.
-- When song or user data is rewritten, it is normalized to the newer standardized headers.
-- The admin sign-up checkbox is intentionally open because that was explicitly requested. It is useful for demos, but not secure for production.
+- `users.csv`
+- `songs.csv`
+- `playlists.csv`
+- `images`
