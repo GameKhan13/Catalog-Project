@@ -59,7 +59,3 @@ http://localhost:4570
 - Existing Catalog-Project songs and images are preserved.
 - When song or user data is rewritten, it is normalized to the newer standardized headers.
 - The admin sign-up checkbox is intentionally open because that was explicitly requested. It is useful for demos, but not secure for production.
-
-## Documentation
-
-A full upgrade log is included in `UPGRADE_CHANGELOG.md`.
