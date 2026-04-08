@@ -44,8 +44,9 @@ const el = {
   loginPassword: document.getElementById('loginPassword'),
   signupUsername: document.getElementById('signupUsername'),
   signupPassword: document.getElementById('signupPassword'),
-  signupIsAdmin: document.getElementById('signupIsAdmin'),
   filtersButton: document.getElementById('filtersButton'),
+  collapseSideButton: document.getElementById('collapseSideButton'),
+  expandSideButton: document.getElementById('expandSideButton'),
 };
 
 function setAuth(token, user) {
@@ -214,6 +215,7 @@ function renderPlaylists() {
             </div>
           </div>
           <div class="song-actions">
+            <button class="ghost-btn compact collapse-playlist-btn" data-playlist-id="${playlist.id}">Show</button>
             <button class="ghost-btn compact rename-playlist-btn" data-playlist-id="${playlist.id}">Rename</button>
             <button class="danger-btn compact delete-playlist-btn" data-playlist-id="${playlist.id}">Delete</button>
           </div>
@@ -328,7 +330,7 @@ el.signupForm.addEventListener('submit', async (event) => {
       body: JSON.stringify({
         username: el.signupUsername.value,
         password: el.signupPassword.value,
-        isAdmin: el.signupIsAdmin.checked,
+        isAdmin: false,
       }),
     });
     setAuth(data.token, data.user);
@@ -472,6 +474,7 @@ el.playlistList.addEventListener('click', async (event) => {
   const removeBtn = event.target.closest('.remove-song-btn');
   const deleteBtn = event.target.closest('.delete-playlist-btn');
   const renameBtn = event.target.closest('.rename-playlist-btn');
+  const collapseBtn = event.target.closest('.collapse-playlist-btn');
 
   try {
     if (removeBtn) {
@@ -507,6 +510,17 @@ el.playlistList.addEventListener('click', async (event) => {
       await refreshPlaylists();
       showToast('Playlist renamed');
     }
+
+    if (collapseBtn) {
+      var content = collapseBtn.parentElement.parentElement.nextElementSibling;
+      if (content.classList.contains("open")) {
+        content.classList.remove("open");
+        this.textContent = "Show";
+      } else {
+        content.classList.add("open");
+        this.textContent = "Hide";
+      }
+    }
   } catch (error) {
     showToast(error.message, true);
   }
@@ -519,6 +533,18 @@ el.filtersButton.addEventListener("click", function() {
     content.classList.remove("open");
   } else {
     content.classList.add("open");
+  }
+});
+
+el.collapseSideButton.addEventListener("click", function() {
+  this.classList.toggle("active");
+  var content = this.parentElement.nextElementSibling;
+  if (content.classList.contains("open")) {
+    content.classList.remove("open");
+    this.textContent = ">>";
+  } else {
+    content.classList.add("open");
+    this.textContent = "<<";
   }
 });
 

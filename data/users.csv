@@ -1,0 +1,3 @@
+id,username,passwordHash,isAdmin
+4a275eff-ffd6-4d0a-bedc-d0c98cb40d73,admin,$2a$10$xM4k.CwaIYXhLAn/6nfM3.mwB8PB8HfM7ROFvJdNEbwIr5IzEfIsi,true
+8395a206-fd49-4be8-9717-de95e49fa588,eliseo,$2a$10$bX51TN11StbN5J4J0ddXZucPH1vDr.ziLMiivYhC1BKKSrgvvJS2O,false

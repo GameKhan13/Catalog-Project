@@ -13,13 +13,11 @@ import musiccatalog.model.Song;
 import musiccatalog.model.User;
 
 public class DataService {
-    public static final Path DATA_DIR = Paths.get("src", "main", "resources");
-    public static final Path PUBLIC_DIR = DATA_DIR.resolve("public");
-    public static final Path PRIVATE_DIR = DATA_DIR.resolve("private");
-    public static final Path IMAGE_DIR = PUBLIC_DIR.resolve("images");
-    public static final Path USERS_CSV = PRIVATE_DIR.resolve("users.csv");
-    public static final Path SONGS_CSV = PRIVATE_DIR.resolve("songs.csv");
-    public static final Path PLAYLISTS_CSV = PRIVATE_DIR.resolve("playlists.csv");
+    public static final Path DATA_DIR = Paths.get("data");
+    public static final Path IMAGE_DIR = DATA_DIR.resolve("images");
+    public static final Path USERS_CSV = DATA_DIR.resolve("users.csv");
+    public static final Path SONGS_CSV = DATA_DIR.resolve("songs.csv");
+    public static final Path PLAYLISTS_CSV = DATA_DIR.resolve("playlists.csv");
 
     private final UserService userService;
     private final SongService songService;
@@ -33,8 +31,7 @@ public class DataService {
 
     public void initialize() {
         try {
-            Files.createDirectories(PUBLIC_DIR);
-            Files.createDirectories(PRIVATE_DIR);
+            Files.createDirectories(DATA_DIR);
             Files.createDirectories(IMAGE_DIR);
 
             ensureFileHasHeader(USERS_CSV, userService.headerLine());

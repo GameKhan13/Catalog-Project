@@ -221,7 +221,7 @@ textarea:focus {
 
 /* Two-column layout for the main app screen. */
 .app-screen {
-  display: grid;
+  display: flex;
   grid-template-columns: 320px 1fr;
 }
 
@@ -230,6 +230,7 @@ textarea:focus {
   background: rgba(10, 10, 10, 0.96);
   border-right: 1px solid var(--line);
   padding: 22px;
+  max-width: fit-content;
 }
 
 .sidebar > div {
@@ -316,6 +317,7 @@ textarea:focus {
   padding: 28px;
   display: grid;
   gap: 20px;
+  flex: 1;
 }
 
 /* Top banner area of the catalog page. */
@@ -541,6 +543,9 @@ textarea:focus {
   display: grid;
   gap: 10px;
   margin-top: 12px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
 }
 .empty-state {
   padding: 22px;
@@ -605,5 +610,23 @@ textarea:focus {
 }
 
 .filter-grid.open {
+  max-height: fit-content;
+}
+
+.sidebar-content {
+  max-width: 0;
+  overflow: hidden;
+  transition: max-width 0.5s ease-out;
+}
+
+.sidebar-content.open {
+  max-width: fit-content;
+}
+
+.sidebar-collapse-button {
+  padding-bottom: 18px;
+}
+
+.playlist-song-list.open {
   max-height: fit-content;
 }

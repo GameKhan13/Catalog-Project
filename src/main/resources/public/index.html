@@ -44,10 +44,6 @@
         Password
         <input id="signupPassword" type="password" minlength="6" required />
       </label>
-      <label class="checkbox-row">
-        <input id="signupIsAdmin" type="checkbox" />
-        <span>Create as admin account</span>
-      </label>
       <button type="submit" class="primary-btn">Create account</button>
     </form>
   </div>
@@ -55,7 +51,10 @@
 
 <section id="appScreen" class="screen app-screen hidden">
   <aside class="sidebar">
-    <div>
+    <div class="sidebar-collapse-button">
+      <button id="collapseSideButton" class="primary-btn"><<</button>
+    </div>
+    <div class="sidebar-content open">
       <div class="sidebar-brand">
         <div class="brand-logo small">♪</div>
         <div>
